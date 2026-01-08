@@ -1614,7 +1614,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerPivot: {fileID: 20775894}
-  characterAnims: []
+  characterAnims:
+  - {fileID: 6826591422164266205}
+  - {fileID: 275633580086469324}
+  - {fileID: 6553674170825554705}
+  - {fileID: 5966520936202423981}
   leftButton: {fileID: 548744105}
   rightButton: {fileID: 377757389}
   selectButton: {fileID: 1051745424}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -82,7 +83,8 @@ namespace Farm
 
         IEnumerator SelectRoutine()
         {
-            characterAnims[characterIndex].SetTrigger("Select");
+            
+            characterAnims[characterIndex].SetTrigger("Dance");
             yield return new WaitForSeconds(5f);
 
             FadeEvent.fadeAction?.Invoke(3f, Color.black, true);

@@ -148,7 +148,7 @@ AnimatorController:
   m_Name: Character Select
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Select
+  - m_Name: Dance
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -198,7 +198,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Select
+    m_ConditionEvent: Dance
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -661014656435966684}
