@@ -75,9 +75,9 @@ namespace Farm
 
         private void Select()
         {
-            FadeEvent.fadeAction?.Invoke(3f, Color.black, true);
-
             DataManager.Instance.SelectCharacterIndex = characterIndex; // 현재 선택한 캐릭터 인덱스 저장
+            
+            StartCoroutine(SelectRoutine());
         }
 
         IEnumerator SelectRoutine()
