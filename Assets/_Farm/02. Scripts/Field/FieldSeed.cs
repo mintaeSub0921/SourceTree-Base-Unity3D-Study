@@ -14,6 +14,9 @@ public class FieldSeed : IField
 
     public void FieldAction()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (Input.GetMouseButtonDown(0) && selectCrop)
         {
 
@@ -30,8 +33,7 @@ public class FieldSeed : IField
 
             }
 
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
+            
 
         }
     }
