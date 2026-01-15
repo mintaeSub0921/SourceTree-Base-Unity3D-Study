@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904fe8143211ac741b84fdb72e47ae3e, type: 3}
   m_Name: Turnip
   m_EditorClassIdentifier: 
+  fruit: {fileID: 8686331146235512111, guid: 07d117fd0e2f1cd43b87bee7096d6d64, type: 3}
   growthTime: 2.5
   maxFruitCount: 2

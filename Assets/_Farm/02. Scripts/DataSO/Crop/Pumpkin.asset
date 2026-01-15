@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904fe8143211ac741b84fdb72e47ae3e, type: 3}
   m_Name: Pumpkin
   m_EditorClassIdentifier: 
+  fruit: {fileID: 2951154856403859029, guid: d06ea3890bd3d91478b1d41e6eb4a505, type: 3}
   growthTime: 5
   maxFruitCount: 1

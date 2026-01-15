@@ -1,34 +1,59 @@
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.SearchService;
+using System.Collections.Generic;
+using System;
+
 
 public class PoolManager : SingletonCore<PoolManager>
 {
-    public ObjectPool<GameObject> pool;
-    public GameObject prefab;
+    [Serializable]
+    public class PoolData
+    {
+        public string name;
+        public GameObject prefab;
+
+    }
+
+    public List<PoolData> poolList = new List<PoolData>();
+    private Dictionary<string, IObjectPool<GameObject>> poolDics = new Dictionary<string, IObjectPool<GameObject>>();
+
 
     protected override void Awake()
     {
         base.Awake();
 
-        pool = new ObjectPool<GameObject>(CreateObject, GetObject, ReleaseObject);
+        foreach (var poolData in poolList)
+        {
+            poolDics[poolData.name] = new ObjectPool<GameObject>(
+                createFunc: () => Instantiate(poolData.prefab), // 생성하는 기능
+                actionOnGet: (obj) => obj.SetActive(true), // 꺼내는 기능
+                actionOnRelease: (obj) => obj.SetActive(false)); // 넣는 기능
+
+        }
     }
 
-    private GameObject CreateObject()
+    public GameObject GetObject(string key)
     {
-        GameObject obj = Instantiate(prefab);
+        if (poolDics.ContainsKey(key))
+        {
 
-        return obj;
+            GameObject obj = poolDics[key].Get();
+
+            return obj;
+        }
+
+        Debug.LogError($"Pool {key} has not founded");
+        return null;
     }
 
-    private void GetObject(GameObject obj)
+    public void ReleaseObject(string key, GameObject obj)
     {
-        obj.SetActive(true);
-    }
+        if (poolDics.ContainsKey(key))
+            poolDics[key].Release(obj);
+        else
+            Debug.LogError($"Pool {key} has not founded");
 
-    private void ReleaseObject(GameObject obj)
-    {
-        obj.SetActive(false);
     }
 
 }
+

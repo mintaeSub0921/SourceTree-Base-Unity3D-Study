@@ -11,7 +11,7 @@ public class Crop : MonoBehaviour
     [SerializeField] private CropData data;
 
     private float growthTime;
-    public bool isHarvest;
+    
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class Crop : MonoBehaviour
 
     private void OnEnable()
     {
-        isHarvest = false;
+        
         SetState(CropState.Level1);
         WeatherSystem.weatherChanged += SetGrowth;
 
@@ -42,13 +42,15 @@ public class Crop : MonoBehaviour
         yield return new WaitForSeconds(growthTime);
         SetState(CropState.Level3);
 
-        isHarvest = true;
+       
     }
 
     private void SetState(CropState newState)
     {
         for (int i = 0; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.SetActive(i == (int)newState);
+
+        cropState = newState;
     }
 
     private void SetGrowth(WeatherType weatherType)
@@ -73,7 +75,13 @@ public class Crop : MonoBehaviour
                 growthTime = 10;
 
             currentWeather = weatherType;
-            Debug.Log("성장 속도 변경");
+            
         }
+    }
+
+    public void SetCropData(out GameObject fruit, out int maxCount)
+    {
+        fruit = data.fruit;
+        maxCount = data.maxFruitCount;
     }
 }

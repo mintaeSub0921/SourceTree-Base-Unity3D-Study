@@ -1,8 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     public Vector2Int arrayPos;
+
+    private GameObject cropObj;
+    private GameObject fruitPrefab;
+    private int maxFruitCount;
 
     private bool isCreate = false;
 
@@ -11,7 +16,9 @@ public class Tile : MonoBehaviour
         if (isCreate)
             return;
 
-        GameObject cropObj = Instantiate(cropPrefab);
+
+        cropObj = Instantiate(cropPrefab);
+        cropObj = PoolManager.Instance.GetObject(cropPrefab.name);
         // GameObject cropObj = PoolManager.Instance.pool.Get();
 
         cropObj.transform.SetParent(transform);
@@ -22,5 +29,47 @@ public class Tile : MonoBehaviour
         cropObj.transform.localRotation = Quaternion.Euler(randomRot);
 
         isCreate = true;
+
+        cropObj.GetComponent<Crop>().SetCropData(out fruitPrefab, out maxFruitCount);
+    }
+
+    public void HarvestCrop()
+    {
+        if (isCreate)
+        {
+            Crop crop = cropObj.GetComponent<Crop>();
+            if (crop.cropState == Crop.CropState.Level3)
+            {
+                isCreate = false;
+                string cropName = cropObj.name.Replace("(Clone)", "");
+                PoolManager.Instance.ReleaseObject(cropName, cropObj);
+
+                StartCoroutine(HarvestRoutine());
+            }
+        }
+
+
+    }
+
+    IEnumerator HarvestRoutine()
+    {
+        int randomAmount = Random.Range(1, maxFruitCount);
+
+        for (int i = 0; i < randomAmount; i++)
+        {
+            GameObject fruitObj = PoolManager.Instance.GetObject(fruitPrefab.name);
+
+            fruitObj.transform.position = transform.position + Vector3.up * 0.5f;
+            Rigidbody fruitRb = fruitObj.GetComponent<Rigidbody>();
+
+            float randomX = Random.Range(-1f, 1f);
+            float randomZ = Random.Range(-1f, 1f);
+
+            Vector3 forceDir = new Vector3(randomX, 3f, randomZ);
+            fruitRb.AddForce(forceDir, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(0.25f);
+
+        }
     }
 }
