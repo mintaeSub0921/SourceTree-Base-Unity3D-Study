@@ -103,10 +103,26 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!EventSystem.current.IsPointerOverGameObject()) // UI클릭이 안됐을 때
+            DropItemToWorld();
+
         dragItem.sprite = null;
         dragItem.gameObject.SetActive(false);
         dragSlot = null;
         dragItem.raycastTarget = true;
+    }
+
+    private void DropItemToWorld()
+    {
+        if (item == null)
+            return;
+
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 10f;
+        Vector3 spawnPos = Camera.main.ScreenToWorldPoint(mousePos);
+        GameObject dropObj = PoolManager.Instance.GetObject(item.ItemName);
+        dropObj.transform.position = spawnPos + Vector3.up;
+        SetItem(null);
     }
 
 }
