@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1383028759232840636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5255378667607441991}
+  - component: {fileID: 5569899886638566553}
+  m_Layer: 0
+  m_Name: Pool Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5255378667607441991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383028759232840636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5569899886638566553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383028759232840636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5e70f8bdc8d554da88bf4deba076cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolList:
+  - name: Carrot_Crop
+    prefab: {fileID: 1000013410243764, guid: 13163011011b31a49891dd103636dc8e, type: 3}
+  - name: Carrot_Fruit
+    prefab: {fileID: 6904701128852291032, guid: 6620b066d700ab449939ef3c709d4ad5, type: 3}
+  - name: Corn_Crop
+    prefab: {fileID: 1000013410243764, guid: 32ed9b3b6e26ace48bbea4b5cea5adbe, type: 3}
+  - name: Corn_Fruit
+    prefab: {fileID: 5730402911375547776, guid: 24021705f79fe9b43bca2b8677d6db06, type: 3}
+  - name: Eggplant_Crop
+    prefab: {fileID: 1000013410243764, guid: ceeba51ab71857f41b6051de1b5d85e8, type: 3}
+  - name: Eggplant_Fruit
+    prefab: {fileID: 7154605473833214195, guid: 34a3602f363a88242a2f33015154aff8, type: 3}
+  - name: Pumpkin_Crop
+    prefab: {fileID: 1000013410243764, guid: 2f83229dde5690d47a01d4c1b964684b, type: 3}
+  - name: Pumpkin_Fruit
+    prefab: {fileID: 2951154856403859029, guid: d06ea3890bd3d91478b1d41e6eb4a505, type: 3}
+  - name: Tomato_Crop
+    prefab: {fileID: 1000013410243764, guid: 05ebefa81b1dcfe488b2b035837d15c5, type: 3}
+  - name: Tomato_Fruit
+    prefab: {fileID: 4592115804037402415, guid: 05a19d63bb825d04da5dbdfca8b1ee9e, type: 3}
+  - name: Turnip_Crop
+    prefab: {fileID: 1000013410243764, guid: 3dae76c46b7868644ac835755fb234ec, type: 3}
+  - name: Turnip_Fruit
+    prefab: {fileID: 8686331146235512111, guid: 07d117fd0e2f1cd43b87bee7096d6d64, type: 3}

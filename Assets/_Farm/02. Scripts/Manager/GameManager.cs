@@ -5,6 +5,10 @@ public class GameManager : SingletonCore<GameManager>
 {
     [SerializeField] private GameObject[] characterPrefabs;
     [SerializeField] private Transform spawnPoint;
+
+    //[SerializeField] private PoolManager poolManager;
+    //[SerializeField] private GameObject canvas;
+    //[SerializeField] private UIManager ui;
     
     protected override void Awake()
     {
