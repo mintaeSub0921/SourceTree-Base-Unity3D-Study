@@ -4,20 +4,19 @@ using UnityEngine.EventSystems;
 public class FieldHarvest : IField
 {
     private Camera mainCamera;
-    
+
     public FieldHarvest()
     {
         mainCamera = Camera.main;
     }
-
-
+    
     public void FieldAction()
     {
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
-
+            
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 

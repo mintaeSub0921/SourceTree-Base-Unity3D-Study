@@ -4,21 +4,33 @@ public class Mover : MonoBehaviour
 {
     public bool isRun, isFly, isSwim;
 
-    private void Update()
+    private IMove move;
+    private MoveRun run;
+    private MoveFly fly;
+    private MoveSwim swim;
+
+    void Start()
     {
-        if (isRun)
-        {
-            Debug.Log("¥ﬁ∏Æ±‚");
-        }
+        run = new MoveRun();
+        fly = new MoveFly();
+        swim = new MoveSwim();
 
-        if (isFly)
-        {
-            Debug.Log("≥Ø±‚");
-        }
+        move = run;
+    }
+    
+    void Update()
+    {
+        if (Input.anyKey)
+            move.Move();
+        
+        // if (Î¨ºÏóê Îì§Ïñ¥Í∞ÄÎ©¥)
+        // {
+        //     move = swim;
+        // }
 
-        if (isSwim)
+        if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log("«Ïæˆƒ°±‚");
+            move = fly;
         }
     }
 }

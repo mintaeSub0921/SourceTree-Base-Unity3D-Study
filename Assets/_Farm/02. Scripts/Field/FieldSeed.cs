@@ -10,16 +10,14 @@ public class FieldSeed : IField
     {
         mainCamera = Camera.main;
     }
-
-
+    
     public void FieldAction()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
-
         if (Input.GetMouseButtonDown(0) && selectCrop)
         {
-
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -30,12 +28,7 @@ public class FieldSeed : IField
                 int tileY = tile.arrayPos.y;
 
                 tile.CreateCrop(selectCrop);
-
             }
-
-            
-
         }
     }
 }
-

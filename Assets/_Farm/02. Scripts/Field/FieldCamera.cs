@@ -7,7 +7,7 @@ public class FieldCamera : MonoBehaviour
     [SerializeField] private Vector3 offset, minBounds, maxBounds;
     [SerializeField] private float smoothSpeed = 5f;
 
-    private void Start()
+    void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -16,18 +16,14 @@ public class FieldCamera : MonoBehaviour
     {
         if (target == null)
             return;
+        
+        Vector3 destination = target.position + offset; // ë”°ë¼ê°ˆ í¬ì§€ì…˜
 
-        Vector3 destination = target.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, destination, smoothSpeed * Time.deltaTime); // ¼±Çü ÀÌµ¿ -> ºÎµå·´°Ô º¯°æµÇ´Â ±â´É
+        Vector3 smoothedPosition = Vector3.Lerp(transform.localPosition, destination, smoothSpeed * Time.deltaTime); // ë¶€ë“œëŸ½ê²Œ ì´ë™
 
-        smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, minBounds.x, maxBounds.x);
-        smoothedPosition.z = Mathf.Clamp(smoothedPosition.z, minBounds.z, maxBounds.z);
-
-        transform.position = smoothedPosition; // Å¬¸®¾îÄ«¸Ş¶óÀÇ Æ÷Áö¼ÇÀ» 0, 0, 0 À¸·Î ÃÊ±âÈ­¸¦ ½ÃÅ°Áö ¾Ê¾Æ¼­ transform.position ´ë½Å transform.localPosition »ç¿ë
-
-
+        smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, minBounds.x, maxBounds.x); // xì¶• ì˜ì—­ ì œí•œ
+        smoothedPosition.z = Mathf.Clamp(smoothedPosition.z, minBounds.z, maxBounds.z); // zì¶• ì˜ì—­ ì œí•œ
+        
+        transform.localPosition = smoothedPosition;
     }
-
-
-
 }

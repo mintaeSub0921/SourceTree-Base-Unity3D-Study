@@ -90,7 +90,7 @@
                 {
                     "name": "Inventory",
                     "type": "Button",
-                    "id": "3032c5fc-fb22-4d35-90bf-5f827442fd0d",
+                    "id": "618be437-30a7-431f-a2f6-686ef77bf362",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -99,7 +99,7 @@
                 {
                     "name": "Escape",
                     "type": "Button",
-                    "id": "f83bcbb1-3e91-4081-9aec-0200ce773c97",
+                    "id": "c720ae2e-f7cf-4483-8202-09c0f668bbd6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -494,7 +494,7 @@
                 },
                 {
                     "name": "",
-                    "id": "150d4cb8-841b-4bee-b9a4-7608fe7f5860",
+                    "id": "40d4c1de-efc2-4edb-b1d8-39db18e668ac",
                     "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
@@ -505,7 +505,7 @@
                 },
                 {
                     "name": "",
-                    "id": "b4b495dd-7720-4619-8a85-9a3811817db3",
+                    "id": "aed5fd51-293f-4802-9448-ef6f76ffad15",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",

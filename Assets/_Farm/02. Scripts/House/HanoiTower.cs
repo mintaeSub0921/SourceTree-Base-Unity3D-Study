@@ -30,14 +30,13 @@ public class HanoiTower : MonoBehaviour, ITriggerEvent
     public void InteractionEnter()
     {
         CameraManager.OnChangedCamera("House", "Hanoi");
-        Camera.main.cullingMask = ~(1 << 2); // 2¹ø ·¹ÀÌ¾î¸¸ »©°í ¼³Á¤(~Ç¥½Ã)
+        Camera.main.cullingMask = ~(1 << 2); // 2ë²ˆ ë ˆì´ì–´ë§Œ ë¹¼ê³  ì„¤ì •
     }
 
     public void InteractionExit()
     {
         CameraManager.OnChangedCamera("Hanoi", "House");
-        Camera.main.cullingMask = -1; // ÀüÃ¼ ·¹ÀÌ¾î ¼³Á¤
-        //Camera.main.cullingMask = 0; // ÀüÃ¼ ¼³Á¤ ÇØÁ¦
-
+        Camera.main.cullingMask = -1; // ì „ì²´ ì„¤ì •
+        // Camera.main.cullingMask = 0; // ì „ì²´ ì„¤ì • í•´ì œ
     }
 }

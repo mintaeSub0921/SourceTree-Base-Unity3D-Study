@@ -12,19 +12,18 @@ public class IntroManager : MonoBehaviour
     [SerializeField] private Button createButton;
     [SerializeField] private Button loginButton;
 
-    private void Start()
+    void Start()
     {
         createButton.onClick.AddListener(() =>
         {
-            //È¸¿ø°¡ÀÔ ±â´É
+            // íšŒì›ê°€ì… ê¸°ëŠ¥
         });
-
+        
         loginButton.onClick.AddListener(() =>
         {
-            //·Î±×ÀÎ ±â´É
+            // ë¡œê·¸ì¸ ê¸°ëŠ¥
             DataManager.Instance.UserID = idInput.text;
             SceneManager.LoadScene(1);
         });
-
     }
 }

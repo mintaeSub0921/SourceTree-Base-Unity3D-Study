@@ -9,10 +9,10 @@ public class CameraManager : MonoBehaviour
 
     private static event Action<string, string> onChangedCamera;
     public static Action<Transform> onSetProperty;
-
+    
     private Dictionary<string, CinemachineCamera> cameraDics = new Dictionary<string, CinemachineCamera>();
 
-    private void Awake()
+    void Awake()
     {
         if (clearShot == null)
             return;
@@ -23,24 +23,20 @@ public class CameraManager : MonoBehaviour
             CinemachineCamera cam = child.GetComponent<CinemachineCamera>();
 
             if (!cameraDics.ContainsKey(child.name)) // 저장된 키값이 있는지 확인
-            {
                 cameraDics.Add(child.name, cam); // 딕셔너리에 저장
-            }
         }
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         onChangedCamera += SetCamera;
         onSetProperty += SetProperty;
-
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         onChangedCamera -= SetCamera;
         onSetProperty -= SetProperty;
-
     }
 
     private void SetCamera(string from, string to)
@@ -54,11 +50,10 @@ public class CameraManager : MonoBehaviour
         onChangedCamera?.Invoke(from, to);
     }
 
-    public void SetProperty(Transform target)
+    private void SetProperty(Transform target)
     {
         cameraDics["Player"].Follow = target;
         cameraDics["Player"].LookAt = target;
         cameraDics["Animal"].LookAt = target;
     }
-
 }

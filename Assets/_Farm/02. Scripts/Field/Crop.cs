@@ -6,30 +6,23 @@ public class Crop : MonoBehaviour
     public enum CropState { Level1, Level2, Level3 }
     public CropState cropState;
 
-    private WeatherType currentWeather;
-
     [SerializeField] private CropData data;
 
     private float growthTime;
-    
 
-    private void Awake()
+    private WeatherType curretWeather = WeatherType.Sun;
+    
+    void OnEnable()
     {
         growthTime = data.growthTime;
-
-    }
-
-    private void OnEnable()
-    {
         
         SetState(CropState.Level1);
         WeatherSystem.weatherChanged += SetGrowth;
-
+        
         StartCoroutine(GrowthRoutine());
-
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         WeatherSystem.weatherChanged -= SetGrowth;
     }
@@ -38,11 +31,9 @@ public class Crop : MonoBehaviour
     {
         yield return new WaitForSeconds(growthTime);
         SetState(CropState.Level2);
-
+        
         yield return new WaitForSeconds(growthTime);
         SetState(CropState.Level3);
-
-       
     }
 
     private void SetState(CropState newState)
@@ -53,11 +44,11 @@ public class Crop : MonoBehaviour
         cropState = newState;
     }
 
+    
     private void SetGrowth(WeatherType weatherType)
     {
-        if (currentWeather != weatherType)
+        if (curretWeather != weatherType)
         {
-
             switch (weatherType)
             {
                 case WeatherType.Sun:
@@ -67,15 +58,14 @@ public class Crop : MonoBehaviour
                     growthTime *= 1.3f;
                     break;
                 case WeatherType.Snow:
-                    growthTime *= 2f;
+                    growthTime *= 1.5f;
                     break;
             }
-
-            if (growthTime > 10)
+            
+            if (growthTime > 10) // 최대 성장속도 제한
                 growthTime = 10;
 
-            currentWeather = weatherType;
-            
+            curretWeather = weatherType;
         }
     }
 

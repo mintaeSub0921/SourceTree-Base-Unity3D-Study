@@ -1,5 +1,4 @@
-
-using JetBrains.Annotations;
+using System;
 using UnityEngine;
 
 public class Fruit : MonoBehaviour, ITriggerEvent, IItem
@@ -11,37 +10,31 @@ public class Fruit : MonoBehaviour, ITriggerEvent, IItem
     [field: SerializeField]
     public Sprite Icon { get; private set; }
 
-    private void Awake()
+    void Awake()
     {
         Inven = FindFirstObjectByType<Inventory>();
         Obj = gameObject;
 
         ItemName = gameObject.name.Replace("(Clone)", "");
     }
-
+    
     public void InteractionEnter()
     {
         Get();
-        
-        
     }
 
-    public void InteractionExit()
-    {
-        
-    }
+    public void InteractionExit() { }
 
     public void Get()
     {
-        PoolManager.Instance.ReleaseObject(ItemName, gameObject);
-
+        GameManager.Instance.Pool.ReleaseObject(ItemName, gameObject);
+        Debug.Log($"{ItemName} 획득");
+        
         Inven.GetItem(this);
     }
 
     public void Use()
     {
-
+        Debug.Log($"{ItemName} 사용");
     }
-
-
 }

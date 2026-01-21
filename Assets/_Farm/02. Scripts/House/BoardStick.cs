@@ -31,7 +31,7 @@ public class BoardStick : MonoBehaviour
     {
         if (!CheckRing(ring))
             return;
-
+        
         ring.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         ring.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
@@ -39,7 +39,7 @@ public class BoardStick : MonoBehaviour
 
         HanoiTower.isSelected = false;
         HanoiTower.selectedRing = null;
-
+        
         stack.Push(ring);
     }
 
@@ -52,7 +52,7 @@ public class BoardStick : MonoBehaviour
 
             if (ring.GetComponent<Ring>().ringNumber > peekNumber)
             {
-                Debug.Log("<color=yellow>ÀÛÀº ¸µ À§¿¡ Å« ¸µÀ» ¿Ã¸± ¼ö ¾ø½À´Ï´Ù.</color>");
+                Debug.Log("<color=yellow>ì‘ì€ ë§ ìœ„ì— í° ë§ì„ ì˜¬ë¦´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</color>");
                 return false;
             }
         }

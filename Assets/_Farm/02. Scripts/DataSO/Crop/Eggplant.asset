@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 904fe8143211ac741b84fdb72e47ae3e, type: 3}
-  m_Name: Eggplant
-  m_EditorClassIdentifier: 
-  fruit: {fileID: 7154605473833214195, guid: 34a3602f363a88242a2f33015154aff8, type: 3}
-  growthTime: 7
-  maxFruitCount: 5
+version https://git-lfs.github.com/spec/v1
+oid sha256:a9b869171eda9bdc7286fb45f43b6ccc7c80996b582dbbdf8a8596864d24e9cf
+size 519

@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 1754464881528392329}
   - component: {fileID: 5311952378368080868}
   - component: {fileID: -1514746833417100379}
-  - component: {fileID: -5307865846034581463}
+  - component: {fileID: 590369513978995403}
   m_Layer: 0
   m_Name: Ring_4
   m_TagString: Untagged
@@ -367,7 +367,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!114 &-5307865846034581463
+--- !u!114 &590369513978995403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6292892395920479170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e1da79b5614d9439c1d6d9a425c233, type: 3}
+  m_Script: {fileID: 11500000, guid: 302a6537326741879081430630bf4c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ringNumber: 4

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestManager : SingletonCore<QuestManager>, ISubject // Äù½ºÆ®¸¦ ¹ßÇàÇÏ´Â °³³ä
+public class QuestManager : SingletonCore<QuestManager>, ISubject
 {
     private List<IObserver> observers = new List<IObserver>();
 
@@ -25,23 +25,22 @@ public class QuestManager : SingletonCore<QuestManager>, ISubject // Äù½ºÆ®¸¦ ¹ß
         Quest quest = new Quest(datas[index]);
         questButtons[index].gameObject.SetActive(false);
     }
-
+    
     public void AddObserver(IObserver observer)
     {
         observers.Add(observer);
+        Debug.Log($"í€˜ìŠ¤íŠ¸ {observer.QuestName}ì„ ë“±ë¡í•˜ì˜€ìŠµë‹ˆë‹¤.");
     }
 
     public void RemoveObserver(IObserver observer)
     {
         observers.Remove(observer);
+        Debug.Log($"í€˜ìŠ¤íŠ¸ {observer.QuestName}ì„ ì‚­ì œí•˜ì˜€ìŠµë‹ˆë‹¤.");
     }
 
     public void NotifyListener(string questName)
     {
-        for (int i = observers.Count - 1; i >= 0; i--) // ¿ª¼ø ½ÇÇà
-        {
+        for (int i = observers.Count -1; i >= 0; i--) // ì—­ìˆœ ì‹¤í–‰
             observers[i].Notify(questName);
-        }
-
     }
 }

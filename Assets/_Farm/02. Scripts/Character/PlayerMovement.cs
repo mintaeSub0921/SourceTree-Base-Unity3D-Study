@@ -10,9 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 moveVector;
     private Vector3 verticalVelocity;
-
     
-
     private float currSpeed;
     [SerializeField] private float walkSpeed = 3f;
     [SerializeField] private float runSpeed = 6f;
@@ -98,16 +96,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnInventory(InputValue value)
     {
         if (value.isPressed)
-        {
-            UIManager.Instance.InventoryOnOff();
-        }
+            GameManager.Instance.Ui.InventoryOnOff();
     }
 
     private void OnEscape(InputValue value)
     {
         if (value.isPressed)
-        {
-            UIManager.Instance.AllPopUpClose();
-        }
+            GameManager.Instance.Ui.AllPopUpClose();
     }
 }

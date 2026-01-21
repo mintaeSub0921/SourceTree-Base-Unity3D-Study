@@ -8,10 +8,8 @@ public class HouseArea : MonoBehaviour, ITriggerEvent
         CameraManager.OnChangedCamera("Player", "House");
     }
 
-
     public void InteractionExit()
     {
         CameraManager.OnChangedCamera("House", "Player");
-
     }
 }

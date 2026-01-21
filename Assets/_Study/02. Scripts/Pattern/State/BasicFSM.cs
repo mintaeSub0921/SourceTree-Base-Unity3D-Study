@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BasicFSM : MonoBehaviour
@@ -5,26 +6,26 @@ public class BasicFSM : MonoBehaviour
     public enum MonsterState { Idle, Patrol, Trace, Attack }
     public MonsterState monsterState = MonsterState.Idle;
 
-    private void Update()
+    void Update()
     {
-        switch (monsterState)
+        switch (monsterState) // ìƒíƒœì— ë”°ë¥¸ ê¸°ëŠ¥ ì‹¤í–‰
         {
             case MonsterState.Idle:
-                Debug.Log("Idle : ¸ó½ºÅÍ ´ë±âÁß");
+                Debug.Log("Idle : ëª¬ìŠ¤í„° ëŒ€ê¸°ì¤‘");
                 break;
             case MonsterState.Patrol:
-                Debug.Log("Patrol : ¸ó½ºÅÍ Á¤ÂûÁß");
+                Debug.Log("Patrol : ëª¬ìŠ¤í„° ì •ì°°ì¤‘");
                 break;
             case MonsterState.Trace:
-                Debug.Log("Trace : ¸ó½ºÅÍ Ãß°İÁß");
+                Debug.Log("Trace : ëª¬ìŠ¤í„° ì¶”ê²©ì¤‘");
                 break;
             case MonsterState.Attack:
-                Debug.Log("Attack : ¸ó½ºÅÍ °ø°İÁß");
+                Debug.Log("Attack : ëª¬ìŠ¤í„° ê³µê²©ì¤‘");
                 break;
         }
     }
 
-    public void SetState(MonsterState newState) // »óÅÂº¯°æ
+    public void SetState(MonsterState newState) // ìƒíƒœ ë³€ê²½
     {
         if (monsterState != newState)
             monsterState = newState;

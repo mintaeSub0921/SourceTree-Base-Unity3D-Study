@@ -1,16 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class FieldArea : MonoBehaviour, ITriggerEvent
 {
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private Vector2Int fieldSize = new Vector2Int(10, 10);
-
     private float tileSize = 2f;
-
-    private Camera mainCamera;
     private GameObject[,] tileArray;
 
     private IField field;
@@ -18,15 +14,15 @@ public class FieldArea : MonoBehaviour, ITriggerEvent
     private FieldHarvest harvest;
 
     [SerializeField] private GameObject[] cropPrefabs;
-
+    
     [SerializeField] private GameObject fieldUI;
-    [SerializeField] private GameObject actionUI; // ¾î¶² Çàµ¿À» ÇÒÁö ¼±ÅÃÇÏ´Â UI
-    [SerializeField] private GameObject cropUI; // ½ÉÀ» ÀÛ¹° ¼±ÅÃÇÏ´Â UI
-
-    [SerializeField] private Button seedButton; //
-    [SerializeField] private Button harvestButton;
-    [SerializeField] private Button[] selectCropButtons;
-    [SerializeField] private Button exitButton;
+    [SerializeField] private GameObject actionUI; // ì–´ë–¤ í–‰ë™ì„ í• ì§€ ì„ íƒí•˜ëŠ” UI
+    [SerializeField] private GameObject cropUI; // ì‹¬ì„ ì‘ë¬¼ ì„ íƒí•˜ëŠ” UI
+    
+    [SerializeField] private Button seedButton; // ì‹¬ê¸° ë²„íŠ¼
+    [SerializeField] private Button harvestButton; // ìˆ˜í™•í•˜ê¸° ë²„íŠ¼
+    [SerializeField] private Button[] selectCropButtons; // ì‹¬ì„ ì‘ë¬¼ ì„ íƒí•˜ëŠ” ë²„íŠ¼
+    [SerializeField] private Button backButton; // ë’¤ë¡œê°€ê¸° ë²„íŠ¼
 
     private bool isInteraction;
 
@@ -36,44 +32,42 @@ public class FieldArea : MonoBehaviour, ITriggerEvent
         CreateField();
     }
 
-    void Init()
+    private void Init()
     {
-
         tileArray = new GameObject[fieldSize.x, fieldSize.y];
 
         seed = new FieldSeed();
         harvest = new FieldHarvest();
-
+        
+        // ì‘ë¬¼ ì‹¬ëŠ” ë²„íŠ¼
         seedButton.onClick.AddListener(() =>
         {
-            field = seed; // ÇöÀç Çàµ¿À» ÀÛ¹° ½É±â·Î ¼³Á¤
-            actionUI.SetActive(false); // Çàµ¿ UI ²ô±â
-            cropUI.SetActive(true); // ÀÛ¹° ¼±ÅÃ UI ÄÑ±â
+            field = seed; // í˜„ì¬ í–‰ë™ì„ ì‘ë¬¼ ì‹¬ê¸°ë¡œ ì„¤ì •
+            actionUI.SetActive(false); // í–‰ë™ UI ë„ê¸°
+            cropUI.SetActive(true); // ì‘ë¬¼ ì„ íƒ UI ì¼œê¸°
         });
-
+        
         harvestButton.onClick.AddListener(() =>
         {
             field = harvest;
-
         });
 
-
+        // ì‘ë¬¼ ë²„íŠ¼ë§ˆë‹¤ ê·¸ì— ë§ëŠ” í”„ë¦¬íŒ¹ì„ ìƒì„±í•˜ëŠ” ê¸°ëŠ¥ ë“±ë¡
         for (int i = 0; i < selectCropButtons.Length; i++)
         {
             int j = i;
-            selectCropButtons[i].onClick.AddListener(() => seed.selectCrop = cropPrefabs[j]);
+            selectCropButtons[i].onClick.AddListener(() =>
+            {
+                seed.selectCrop = cropPrefabs[j];
+            });
         }
-
-        exitButton.onClick.AddListener(() =>
+        
+        backButton.onClick.AddListener(() =>
         {
             actionUI.SetActive(true);
             cropUI.SetActive(false);
             seed.selectCrop = null;
-
         });
-
-        
-
     }
 
     public void InteractionEnter()
@@ -82,10 +76,9 @@ public class FieldArea : MonoBehaviour, ITriggerEvent
         CameraManager.OnChangedCamera("Player", "Field");
 
         fieldUI.SetActive(true);
-
-        StartCoroutine(FiledRoutine());
+        
+        StartCoroutine(FieldRoutine());
     }
-
 
     public void InteractionExit()
     {
@@ -93,8 +86,9 @@ public class FieldArea : MonoBehaviour, ITriggerEvent
         fieldUI.SetActive(false);
         CameraManager.OnChangedCamera("Field", "Player");
     }
-
-    void CreateField()
+    
+    #region íƒ€ì¼ ìƒì„±
+    private void CreateField()
     {
         float offsetX = (fieldSize.x - 1) * tileSize / 2f;
         float offsetY = (fieldSize.y - 1) * tileSize / 2f;
@@ -104,31 +98,29 @@ public class FieldArea : MonoBehaviour, ITriggerEvent
             for (int j = 0; j < fieldSize.y; j++)
             {
                 float posX = transform.position.x + i * tileSize - offsetX;
-                float PosZ = transform.position.z + j * tileSize - offsetY;
+                float posZ = transform.position.z + j * tileSize - offsetY;
 
-                GameObject tileObj = Instantiate(tilePrefab, transform); // transform ½ºÄÉÀÏ 1
+                GameObject tileObj = Instantiate(tilePrefab, transform); // transform ìŠ¤ì¼€ì¼ 1
 
-                tileObj.layer = 15; // field Layer¸¦ 15·Î ¼³Á¤, ·¹ÀÌÄ³½ºÆ®·Î ½î±â À§ÇÔ
+                tileObj.layer = 15; // Field Layerë¥¼ 15ë¡œ ì„¤ì •
 
                 tileObj.name = $"Tile_{i}_{j}";
-                tileObj.transform.position = new Vector3(posX, 0, PosZ);
+                tileObj.transform.position = new Vector3(posX, 0, posZ);
                 tileArray[i, j] = tileObj;
 
                 tileObj.GetComponent<Tile>().arrayPos = new Vector2Int(i, j);
-
             }
         }
-
     }
+    #endregion
 
-    IEnumerator FiledRoutine()
+    IEnumerator FieldRoutine()
     {
         while (isInteraction)
         {
             field?.FieldAction();
-
+            
             yield return null;
         }
     }
-
 }

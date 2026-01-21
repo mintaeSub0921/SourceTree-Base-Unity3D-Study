@@ -1,6 +1,6 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CsvTsvParser : MonoBehaviour
 {
@@ -19,15 +19,14 @@ public class CsvTsvParser : MonoBehaviour
             this.HP = HP;
             this.Attack = Attack;
         }
-
     }
 
     [SerializeField] private List<CharacterData> characterDatas = new List<CharacterData>();
 
-    private void Start()
+    void Start()
     {
-        //TextAsset dataFile = Resources.Load<TextAsset>("CSVData");
-        TextAsset dataFile = Resources.Load<TextAsset>("TSVData");
+        TextAsset dataFile = Resources.Load<TextAsset>("CSVData");
+        // TextAsset dataFile = Resources.Load<TextAsset>("TSVData");
 
         string data = dataFile.text;
         ParsingData(data);
@@ -35,21 +34,20 @@ public class CsvTsvParser : MonoBehaviour
 
     private void ParsingData(string data)
     {
-        string[] rows = data.Split('\n'); // ¥‹∂Ù ∫Ø∞Ê ±‚¡ÿ¿∏∑Œ ¿⁄∏£±‚
+        string[] rows = data.Split('\n'); // Îã®ÎùΩ Î≥ÄÍ≤Ω Í∏∞Ï§ÄÏúºÎ°ú ÏûêÎ•¥Í∏∞
 
         foreach (string row in rows)
             Debug.Log(row);
 
         for (int i = 1; i < rows.Length; i++)
         {
-            string row = rows[i].Trim(); // ∞¯πÈ ¡¶∞≈
+            string row = rows[i].Trim(); // Í≥µÎ∞± Ï†úÍ±∞
 
-            //string[] col = row.Split(','); // ƒﬁ∏∂ ±‚¡ÿ¿∏∑Œ ¿⁄∏£±‚
-            string[] col = row.Split('\t'); // ≈« ±‚¡ÿ¿∏∑Œ ¿⁄∏£±‚
+            string[] col = row.Split(','); // ÏΩ§Îßà Í∏∞Ï§ÄÏúºÎ°ú ÏûêÎ•¥Í∏∞
+            // string[] col = row.Split('\t'); // ÌÉ≠ Í∏∞Ï§ÄÏúºÎ°ú ÏûêÎ•¥Í∏∞
 
             CharacterData characterData = new CharacterData(col[0], col[1], int.Parse(col[2]), int.Parse(col[3]));
-            characterDatas.Add(characterData); // ∏ÆΩ∫∆Æø° µ•¿Ã≈Õ √ﬂ∞°
+            characterDatas.Add(characterData); // Î¶¨Ïä§Ìä∏Ïóê Îç∞Ïù¥ÌÑ∞ Ï∂îÍ∞Ä
         }
     }
-
 }

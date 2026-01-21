@@ -1,8 +1,8 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Serialization;
+using UnityEngine;
 
 public class XMLParser : MonoBehaviour
 {
@@ -23,26 +23,23 @@ public class XMLParser : MonoBehaviour
             this.HP = HP;
             this.Attack = Attack;
         }
-
     }
 
     [Serializable]
     [XmlRoot("Characters")]
     public class CharacterList
     {
-        [XmlElement("Character")]
-        public List<CharacterData> Characters;
+        [XmlElement("Character")] public List<CharacterData> characters;
     }
 
     [SerializeField] private List<CharacterData> characterDatas = new List<CharacterData>();
-
-    private void Start()
+    
+    void Start()
     {
         TextAsset dataFile = Resources.Load<TextAsset>("XMLData");
         string data = dataFile.text;
 
         ParsingData(data);
-
     }
 
     private void ParsingData(string data)
@@ -51,9 +48,9 @@ public class XMLParser : MonoBehaviour
 
         using (StringReader reader = new StringReader(data))
         {
-            CharacterList loadedData = (CharacterList)serializer.Deserialize(reader); // Deserialize 역직렬화
+            CharacterList loadedData = (CharacterList)serializer.Deserialize(reader);
 
-            characterDatas = loadedData.Characters;
+            characterDatas = loadedData.characters;
         }
 
         foreach (var characterData in characterDatas)
@@ -61,7 +58,4 @@ public class XMLParser : MonoBehaviour
             Debug.Log($"{characterData.CharID} / {characterData.Name} / {characterData.HP} / {characterData.Attack}");
         }
     }
-
-    
-
 }

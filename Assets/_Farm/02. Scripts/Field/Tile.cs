@@ -7,19 +7,17 @@ public class Tile : MonoBehaviour
 
     private GameObject cropObj;
     private GameObject fruitPrefab;
-    private int maxFruitCount;
 
+    private int maxFruitCount;
     private bool isCreate = false;
 
-    public void CreateCrop(GameObject cropPrefab)
+    #region 작물 심기
+    public void CreateCrop(GameObject cropPrefab) // 타일의 자식으로 작물 생성 기능
     {
         if (isCreate)
             return;
 
-
-        cropObj = Instantiate(cropPrefab);
-        cropObj = PoolManager.Instance.GetObject(cropPrefab.name);
-        // GameObject cropObj = PoolManager.Instance.pool.Get();
+        cropObj = GameManager.Instance.Pool.GetObject(cropPrefab.name);
 
         cropObj.transform.SetParent(transform);
         cropObj.transform.localPosition = Vector3.zero;
@@ -33,6 +31,9 @@ public class Tile : MonoBehaviour
         cropObj.GetComponent<Crop>().SetCropData(out fruitPrefab, out maxFruitCount);
     }
 
+    #endregion
+
+    #region 작물 수확하기
     public void HarvestCrop()
     {
         if (isCreate)
@@ -41,14 +42,13 @@ public class Tile : MonoBehaviour
             if (crop.cropState == Crop.CropState.Level3)
             {
                 isCreate = false;
+                
                 string cropName = cropObj.name.Replace("(Clone)", "");
-                PoolManager.Instance.ReleaseObject(cropName, cropObj);
+                GameManager.Instance.Pool.ReleaseObject(cropName, cropObj);
 
                 StartCoroutine(HarvestRoutine());
             }
         }
-
-
     }
 
     IEnumerator HarvestRoutine()
@@ -57,8 +57,8 @@ public class Tile : MonoBehaviour
 
         for (int i = 0; i < randomAmount; i++)
         {
-            GameObject fruitObj = PoolManager.Instance.GetObject(fruitPrefab.name);
-
+            GameObject fruitObj = GameManager.Instance.Pool.GetObject(fruitPrefab.name);
+            
             fruitObj.transform.position = transform.position + Vector3.up * 0.5f;
             Rigidbody fruitRb = fruitObj.GetComponent<Rigidbody>();
 
@@ -69,7 +69,8 @@ public class Tile : MonoBehaviour
             fruitRb.AddForce(forceDir, ForceMode.Impulse);
 
             yield return new WaitForSeconds(0.25f);
-
         }
     }
+
+    #endregion
 }

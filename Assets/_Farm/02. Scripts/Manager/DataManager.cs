@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Farm
@@ -21,6 +20,5 @@ namespace Farm
 
         public GameObject Player { get; set; }
         public string UserID { get; set; }
-
     }
 }

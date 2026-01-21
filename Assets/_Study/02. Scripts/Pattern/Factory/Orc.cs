@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Orc : MonsterCore
 {
-    public override string Name => "¿ÀÅ©";
+    public override string Name => "ì˜¤í¬";
 
     public override void Attack()
     {
-        Debug.Log("¿ÀÅ© °ø°İ");
+        Debug.Log("ì˜¤í¬ ê³µê²©");   
     }
 }

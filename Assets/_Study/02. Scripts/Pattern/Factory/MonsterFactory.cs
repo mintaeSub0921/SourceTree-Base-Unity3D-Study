@@ -1,7 +1,4 @@
-﻿using System.Collections;
 using UnityEngine;
-
-
 
 public abstract class MonsterFactory : MonoBehaviour
 {
@@ -14,8 +11,4 @@ public abstract class MonsterFactory : MonoBehaviour
     }
 
     protected abstract MonsterCore CreateMonster(string type);
-    
-
-
-
 }

@@ -1,24 +1,19 @@
-﻿using System.Collections;
 using UnityEngine;
 
-
-public class PatrolState : IState
+public class PatrolState : MonoBehaviour, IState
 {
-    public void StateEnter(MonoBehaviour mono)
+    public void StateEnter()
     {
-        Debug.Log("순찰 시작");
+        Debug.Log("정찰 시작");
     }
 
-    public void StateUpdate(MonoBehaviour mono)
+    public void StateUpdate()
     {
-        Debug.Log("순찰중");
-
+        Debug.Log("정찰중");
     }
 
-    public void StateExit(MonoBehaviour mono)
+    public void StateExit()
     {
-        Debug.Log("순찰 종료");
-
+        Debug.Log("정찰 종료");
     }
 }
- 

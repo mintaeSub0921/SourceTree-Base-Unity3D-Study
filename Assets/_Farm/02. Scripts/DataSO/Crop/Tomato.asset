@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 904fe8143211ac741b84fdb72e47ae3e, type: 3}
-  m_Name: Tomato
-  m_EditorClassIdentifier: 
-  fruit: {fileID: 4592115804037402415, guid: 05a19d63bb825d04da5dbdfca8b1ee9e, type: 3}
-  growthTime: 3
-  maxFruitCount: 6
+version https://git-lfs.github.com/spec/v1
+oid sha256:cbf26756e71769682114026d4a9c2f945f37955ad406e2bd83e94c351145937a
+size 518

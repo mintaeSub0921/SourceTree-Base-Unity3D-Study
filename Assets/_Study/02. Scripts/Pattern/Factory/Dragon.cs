@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Dragon : MonsterCore
 {
-    public override string Name => "µå·¡°ï";
+    public override string Name => "ë“œëž˜ê³¤";
+    
     public override void Attack()
     {
-        Debug.Log("µå·¡°ï °ø°Ý");
+        Debug.Log("ë“œëž˜ê³¤ ê³µê²©");
     }
 }
-    

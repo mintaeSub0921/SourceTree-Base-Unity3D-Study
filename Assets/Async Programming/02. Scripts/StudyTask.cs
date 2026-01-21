@@ -1,25 +1,46 @@
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class StudyTask : MonoBehaviour
 {
+    private int x, y, r1, r2;
+    private int count = 0;
+
     async void Start()
     {
-        Debug.Log("Main Thread ½ÇÇà");
-        await Task.Run(SubThread); // ºñµ¿±â ¹æ½Ä
+        Debug.Log("í…ŒìŠ¤íŠ¸ ì‹œì‘");
 
-        //t.Join();   
-        //Task.Wait();  µ¿±â ¹æ½Ä
+        await Task.Run(() =>
+        {
+            while (true)
+            {
+                count++;
 
-        Debug.Log("Main Thread Á¾·á");
+                x = y = r1 = r2 = 0;
+
+                Task t1 = Task.Run(SubThread1);
+                Task t2 = Task.Run(SubThread2);
+
+                Task.WaitAll(t1, t2);
+
+                if (r1 == 0 && r2 == 0)
+                    break;
+            }
+        });
+
+        Debug.Log($"r1 = 0, r2 = 0 í˜„ìƒ ë°œìƒ Count : {count}");
     }
 
-    void SubThread()
+    private void SubThread1()
     {
-        Debug.Log("Sub Thread ½ÇÇà");
-        Thread.Sleep(3000);
+        y = 1;
+        r1 = x;
+    }
 
-        Debug.Log("Sub Thread Á¾·á");
+    private void SubThread2()
+    {
+        x = 1;
+        r2 = y;
     }
 }

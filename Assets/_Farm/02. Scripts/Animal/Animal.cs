@@ -1,17 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 public class Animal : MonoBehaviour, ITriggerEvent
 {
-    private NavMeshAgent agent;
     private Animator anim;
+    private NavMeshAgent agent;
 
     [SerializeField] private float wanderRadius = 15f;
-
-    private float minWaitTime = 1f, maxWaitTime = 5f;
     
+    private float minWaitTime = 1f, maxWaitTime = 5f;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -22,41 +21,34 @@ public class Animal : MonoBehaviour, ITriggerEvent
     {
         while (true)
         {
-            
             SetRandomDestination();
             anim.SetBool("IsWalk", true);
-
-            yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance); // ±æÃ£±â Á¾·á && ³²¾ÆÀÖ´Â °Å¸®¿Í Á¤Áö °Å¸® ºñ±³
-
+                                            // ê¸¸ ì°¾ê¸° ì¢…ë£Œ                    ë‚¨ì•„ìžˆëŠ” ê±°ë¦¬ì™€ ì •ì§€ ê±°ë¦¬ ë¹„êµ
+            yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+            
             anim.SetBool("IsWalk", false);
             float waitTime = Random.Range(minWaitTime, maxWaitTime);
-            
             yield return new WaitForSeconds(waitTime);
-
         }
     }
 
-    // µ¿¹°ÀÇ ¹Ý°æ ¾È¿¡¼­ ·£´ýÇÑ À§Ä¡·Î ¸ñÀûÁö¸¦ ¼³¸í ¹× ÀÌµ¿ÇÏ´Â ±â´É
+    // ë™ë¬¼ì˜ ë°˜ê²½ ì•ˆì—ì„œ ëžœë¤í•œ ìœ„ì¹˜ë¡œ ëª©ì ì§€ë¥¼ ì„¤ëª… ë° ì´ë™í•˜ëŠ” ê¸°ëŠ¥
     private void SetRandomDestination()
     {
-        var randomDir = Random.insideUnitSphere * wanderRadius; // RandomRange(ÃÖ¼Ò°ª, ÃÖ´ë°ª) -> ·£´ýÀÇ À§Ä¡ Random.insideUnitSphere -> °¡»óÀÇ ½ºÇÇ¾î ±¸°£À» ¸¸µé°í ·£´ý Áö¸§ À§Ä¡¿¡ ¸ñÀûÁö ¼³Á¤
-
+        var randomDir = Random.insideUnitSphere * wanderRadius;
         randomDir += transform.position;
+
         NavMeshHit hit;
-        if(NavMesh.SamplePosition(randomDir, out hit, wanderRadius, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomDir, out hit, wanderRadius, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
         }
     }
-
-
+    
     public void InteractionEnter()
     {
         AnimalArea.failAction?.Invoke();
     }
 
-    public void InteractionExit()
-    {
-
-    }
+    public void InteractionExit() { }
 }

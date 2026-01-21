@@ -1,24 +1,19 @@
-﻿using System.Collections;
 using UnityEngine;
 
-
-
-public class IdleState : IState
+public class IdleState : MonoBehaviour, IState
 {
-    public void StateEnter(MonoBehaviour mono)
+    public void StateEnter()
     {
         Debug.Log("대기 시작");
     }
 
-    public void StateUpdate(MonoBehaviour mono)
+    public void StateUpdate()
     {
         Debug.Log("대기중");
-
     }
 
-    public void StateExit(MonoBehaviour mono)
+    public void StateExit()
     {
         Debug.Log("대기 종료");
-
     }
 }

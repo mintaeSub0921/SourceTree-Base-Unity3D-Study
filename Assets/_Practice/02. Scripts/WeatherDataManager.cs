@@ -1,14 +1,15 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using System;
-using System.Collections.Generic;
 
 public class WeatherDataManager : MonoBehaviour
 {
-    #region JSON µ¥ÀÌÅÍ Å¬·¡½º
+    #region JSON ë°ì´í„° í´ë˜ìŠ¤
+
     [Serializable]
-    public class WeatherAPIResponse
+    public class WeatherApiResponse
     {
         public Response response;
     }
@@ -34,7 +35,7 @@ public class WeatherDataManager : MonoBehaviour
         public Items items;
         public string pageNo;
         public string numOfRows;
-        public string tatalCount;
+        public string totalCount;
     }
 
     [Serializable]
@@ -60,7 +61,17 @@ public class WeatherDataManager : MonoBehaviour
 
     private string URL = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?";
 
-    public string key, pageNo, numOfRows, dataType, baseDate, baseTime, axisX, axisY;
+    #region ì…ë ¥ íŒŒë¼ë¯¸í„°
+
+    public string key;
+    public string pageNo;
+    public string numOfRows;
+    public string dataType;
+    public string baseDate;
+    public string baseTime;
+    public string axisX, axisY;
+
+    #endregion
 
     IEnumerator Start()
     {
@@ -76,23 +87,21 @@ public class WeatherDataManager : MonoBehaviour
         }
         else
         {
-            string rawData = www.downloadHandler.text;
-            Debug.Log("Àü´Ş¹ŞÀº µ¥ÀÌÅÍ : " + rawData);
-
-            WeatherAPIResponse weatherData = JsonUtility.FromJson<WeatherAPIResponse>(rawData); // JSON µ¥ÀÌÅÍ ÆÄ½Ì
+            string rawData = www.downloadHandler.text; // ê°€ê³µë˜ì§€ ì•Šì€ ë°ì´í„°
+            Debug.Log("ì „ë‹¬ë°›ì€ ë°ì´í„° : " + rawData);
+            
+            WeatherApiResponse weatherData = JsonUtility.FromJson<WeatherApiResponse>(rawData); // JSON ë°ì´í„° íŒŒì‹±
 
             foreach (var item in weatherData.response.body.items.item)
             {
                 if (item.category == "PCP")
-                    Debug.Log($"°­¼ö : {item.fcstValue}");
+                    Debug.Log($"ê°•ìˆ˜ : {item.fcstValue}");
                 else if (item.category == "SNO")
-                    Debug.Log($"Àû¼³ : {item.fcstValue}");
+                    Debug.Log($"ì ì„¤ : {item.fcstValue}");
+                else if (item.category == "SKY")
+                    Debug.Log($"í•˜ëŠ˜ìƒíƒœ : {item.fcstValue}");
             }
+
         }
-
-            string data = www.downloadHandler.text;
-        Debug.Log(data);
     }
-
-
 }

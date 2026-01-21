@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Slime : MonsterCore
 {
-    public override string Name => "½½¶óÀÓ";
-
+    public override string Name => "ìŠ¬ë¼ì„";
+    
     public override void Attack()
     {
-        Debug.Log("½½¶óÀÓ °ø°İ");
+        Debug.Log("ìŠ¬ë¼ì„ ê³µê²©");
     }
 }

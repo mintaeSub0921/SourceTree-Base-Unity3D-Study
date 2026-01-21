@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class AnimalArea : MonoBehaviour, ITriggerEvent
 {
     public static Action failAction;
-
+    
     [SerializeField] private GameObject flag;
     [SerializeField] private TextMeshProUGUI timerUI;
 
@@ -20,39 +20,37 @@ public class AnimalArea : MonoBehaviour, ITriggerEvent
     {
         failAction += SetRandomPosition;
     }
-
+    
     void OnDisable()
     {
         failAction -= SetRandomPosition;
     }
-
-
-    private void Start()
+    
+    void Start()
     {
         coll = GetComponent<BoxCollider>();
     }
-
+    
     public void InteractionEnter()
     {
         isInteract = true;
         timerUI.gameObject.SetActive(true);
+        
         CameraManager.OnChangedCamera("Player", "Animal");
         SetRandomPosition();
 
         StartCoroutine(AnimalRoutine());
     }
 
-
     public void InteractionExit()
     {
         isInteract = false;
         timerUI.gameObject.SetActive(false);
-
+        
         CameraManager.OnChangedCamera("Animal", "Player");
         SetFlag(Vector3.zero, false);
 
-        
-        Debug.Log($"±Íπﬂ¿ª ∞°¡ˆ∞Ì ≥™ø¿¥¬µ• ∞…∏∞ Ω√∞£ : {(int)timer}√ ");
+        Debug.Log($"ÍπÉÎ∞úÏùÑ Í∞ÄÏßÄÍ≥† ÎÇòÏò§ÎäîÎç∞ Í±∏Î¶∞ ÏãúÍ∞ÑÏùÄ {(int)timer}Ï¥à ÏûÖÎãàÎã§.");
         timer = 0f;
     }
 
@@ -64,20 +62,23 @@ public class AnimalArea : MonoBehaviour, ITriggerEvent
 
             int min = Mathf.FloorToInt(timer / 60);
             int sec = Mathf.FloorToInt(timer % 60);
-            //timerUI.text = string.Format("{0:00}:{1:00}", min, sec);
-            timerUI.text = $"{min:F0} : {sec:F0}";
-
+            // timerUI.text = $"{min:D2} : {sec:D2}";
+            timerUI.text = string.Format("{0:00}:{1:00}", min, sec);
+            
             yield return null;
         }
     }
 
     private void SetRandomPosition()
     {
+        if (!Flag.IsHasFlag)
+            return;
+            
         float randomX = Random.Range(coll.bounds.min.x, coll.bounds.max.x);
         float randomZ = Random.Range(coll.bounds.min.z, coll.bounds.max.z);
 
         Vector3 randomPos = new Vector3(randomX, 0f, randomZ);
-
+        
         SetFlag(randomPos, true);
     }
 
@@ -86,7 +87,7 @@ public class AnimalArea : MonoBehaviour, ITriggerEvent
         flag.transform.SetParent(transform);
         flag.transform.position = pos;
         flag.SetActive(isActive);
+
+        Flag.IsHasFlag = false;
     }
-
-
 }

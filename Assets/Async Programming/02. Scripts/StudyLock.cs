@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class StudyLock : MonoBehaviour
@@ -8,32 +8,27 @@ public class StudyLock : MonoBehaviour
 
     async void Start()
     {
-        Debug.Log("Å×½ºÆ® ½ÃÀÛ");
+        Debug.Log("í…ŒìŠ¤íŠ¸ ì‹œì‘");
 
         Task t1 = Task.Run(() => SubThread("T1"));
         Task t2 = Task.Run(() => SubThread("T2"));
-
+        
         await Task.WhenAll(t1, t2);
 
-        Debug.Log("¸ŞÀÎ ¾²·¹µå Á¾·á");
-
-
+        Debug.Log("ë©”ì¸ ì“°ë ˆë“œ ì¢…ë£Œ");
     }
 
-    void SubThread(string msg)
+    private void SubThread(string msg)
     {
         lock (obj)
         {
-
-            Debug.Log($"{msg} ¾²·¹µå ½ÃÀÛ");
+            Debug.Log($"{msg} ì“°ë ˆë“œ ì‹œì‘");
             Thread.Sleep(500);
-
-            Debug.Log($"{msg} ¾²·¹µå ÁøÇàÁß");
+            
+            Debug.Log($"{msg} ì“°ë ˆë“œ ì§„í–‰ì¤‘");
             Thread.Sleep(500);
-
-            Debug.Log($"{msg} ¾²·¹µå Á¾·á");
+            
+            Debug.Log($"{msg} ì“°ë ˆë“œ ì¢…ë£Œ");
         }
-
     }
-
 }

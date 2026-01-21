@@ -4,7 +4,6 @@ using UnityEngine;
 public class QuestData : ScriptableObject
 {
     public string questName;
-    public string QuestItem;
+    public string questItem;
     public int requestCount;
-
 }

@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class JsonParser : MonoBehaviour
@@ -9,7 +9,6 @@ public class JsonParser : MonoBehaviour
     {
         public List<CharacterData> characters;
     }
-    
 
     [Serializable]
     public class CharacterData
@@ -26,12 +25,11 @@ public class JsonParser : MonoBehaviour
             this.HP = HP;
             this.Attack = Attack;
         }
-
     }
 
     [SerializeField] private List<CharacterData> characterDatas = new List<CharacterData>();
 
-    private void Start()
+    void Start()
     {
         TextAsset dataFile = Resources.Load<TextAsset>("JSONData");
         string data = dataFile.text;
@@ -48,5 +46,4 @@ public class JsonParser : MonoBehaviour
             characterDatas.Add(characterData);
         }
     }
-
 }

@@ -1,25 +1,24 @@
-using UnityEngine;
 using System.Threading;
+using UnityEngine;
 
 public class StudyThread : MonoBehaviour
 {
-    private void Start()
+    void Start()
     {
         Thread t = new Thread(SubThread);
         t.IsBackground = true;
-
+        
         t.Start();
-
-        t.Join(); // Thread°¡ ¿Ï·áµÉ ¶§±îÁö ´ë±â -> µ¿±â
-
-        Debug.Log("Main Thread Á¾·á");
+        
+        t.Join();
+        Debug.Log("Main Thread ì¢…ë£Œ");
     }
-
+    
     private void SubThread()
     {
-        Debug.Log("¼­ºê¾²·¹µå ½ÇÇà");
-        Thread.Sleep(2000); // 2ÃÊ ¸ØÃã
-
-        Debug.Log("Sub Thread");
+        Debug.Log("Sub Thread ì‹¤í–‰");
+        
+        Thread.Sleep(5000); // 5ì´ˆ
+        Debug.Log("Sub Thread ì¢…ë£Œ");
     }
 }
