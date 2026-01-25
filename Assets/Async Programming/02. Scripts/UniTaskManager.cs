@@ -53,7 +53,7 @@ public class UniTaskManager : MonoBehaviour
 
     void Start()
     {
-        database = FirebaseDatabase.GetInstance("https://hellofirebase3-7fa03-default-rtdb.firebaseio.com/");
+        database = FirebaseDatabase.GetInstance("https://fir-practice-e7719-default-rtdb.firebaseio.com/");
         reference = database.RootReference;
 
         // 캐릭터 4개 생성
